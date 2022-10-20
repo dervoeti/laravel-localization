@@ -571,8 +571,10 @@ class LaravelLocalization
         if (!$request) {
             $request = $this->request;
         }
-        if ($this->currentLocale) {
+        if ($this->currentLocale && $request->header('User-agent') != 'Symfony') {
             return $this->currentLocale;
+        } else {
+            $this->currentLocale = null;
         }
 
         if ($this->useAcceptLanguageHeader() && !$this->app->runningInConsole()) {
