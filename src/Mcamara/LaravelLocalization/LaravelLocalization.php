@@ -566,14 +566,17 @@ class LaravelLocalization
      *
      * @return string current language
      */
-    public function getCurrentLocale()
+    public function getCurrentLocale($request = null)
     {
+        if (!$request) {
+            $request = request();
+        }
         if ($this->currentLocale) {
             return $this->currentLocale;
         }
 
         if ($this->useAcceptLanguageHeader() && !$this->app->runningInConsole()) {
-            $negotiator = new LanguageNegotiator($this->defaultLocale, $this->getSupportedLocales(), request());
+            $negotiator = new LanguageNegotiator($this->defaultLocale, $this->getSupportedLocales(), $request);
 
             return $negotiator->negotiateLanguage();
         }

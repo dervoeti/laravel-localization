@@ -47,7 +47,7 @@ class LocaleSessionRedirect extends LaravelLocalizationMiddlewareBase
         }
 
         if ($locale === false){
-            $locale = app('laravellocalization')->getCurrentLocale();
+            $locale = app('laravellocalization')->getCurrentLocale($request);
         }
 
         if (
