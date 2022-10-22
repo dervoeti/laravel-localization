@@ -153,8 +153,12 @@ class LaravelLocalization
      *
      * @return string Returns locale (if route has any) or null (if route does not have a locale)
      */
-    public function setLocale($locale = null)
+    public function setLocale($locale = null, $request = null)
     {
+        if ($request) {
+            $this->request = $request;
+            $this->currentLocale = null;
+        }
         if (empty($locale) || !\is_string($locale)) {
             // If the locale has not been passed through the function
             // it tries to get it from the first segment of the url
@@ -571,6 +575,7 @@ class LaravelLocalization
         if (!$request) {
             $request = request();
         }
+
         if ($this->currentLocale) {
             return $this->currentLocale;
         }

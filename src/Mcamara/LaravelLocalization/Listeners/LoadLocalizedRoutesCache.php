@@ -20,7 +20,7 @@ class LoadLocalizedRoutesCache
         // you don't use translatable routes (transRoute() in web.php) in your project
         // in this case the package will correctly resolve the locale and you
         // don't need to pass the 3rd param when binding in service provider)
-        $locale = LaravelLocalization::setLocale($event->request->segment(1));
+        $locale = LaravelLocalization::setLocale($event->request->segment(1), $event->request);
 
         $path = $this->makeLocaleRoutesPath($event->sandbox, $locale);
 
