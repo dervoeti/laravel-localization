@@ -28,6 +28,7 @@ class LocaleSessionRedirect extends LaravelLocalizationMiddlewareBase
 
         if (\count($params) > 0 && app('laravellocalization')->checkLocaleInSupportedLocales($params[0])) {
             session(['locale' => $params[0]]);
+            app()->setLocale($params[0]);
 
             return $next($request);
         }
@@ -44,6 +45,7 @@ class LocaleSessionRedirect extends LaravelLocalizationMiddlewareBase
             );
             $locale = $negotiator->negotiateLanguage();
             session(['locale' => $locale]);
+            app()->setLocale($locale);
         }
 
         if ($locale === false){
